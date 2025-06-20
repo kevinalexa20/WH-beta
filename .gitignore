@@ -47,3 +47,4 @@ app.*.map.json
 *.env
 
 WH-blueprint.md
+WH-db-scheme.md
