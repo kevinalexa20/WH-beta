@@ -46,5 +46,12 @@ app.*.map.json
 
 *.env
 
+.gitignore
+
 WH-blueprint.md
 WH-db-scheme.md
+your-guideline.md
+WH-userflow.md
+WH-home-feature.md
+WH-nearby-location-feature.md
+WH-merchant-food-item.md

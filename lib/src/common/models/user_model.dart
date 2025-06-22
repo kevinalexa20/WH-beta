@@ -33,7 +33,14 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+  Map<String, dynamic> toJson() {
+    final json = _$UserModelToJson(this);
+
+    json.remove('\$id');
+    json.remove('\$createdAt');
+    json.remove('\$updatedAt');
+    return json;
+  }
 
   UserModel copyWith({
     String? id,

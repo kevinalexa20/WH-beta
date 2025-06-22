@@ -1,6 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:wh_mobile/src/features/authentication/authentication.dart';
 
 part 'appwrite_client.g.dart';
 
@@ -61,4 +62,11 @@ Databases appwriteDatabase(Ref ref) {
 Storage appwriteStorage(Ref ref) {
   final client = ref.watch(appwriteClientProvider);
   return Storage(client);
+}
+
+@riverpod
+AuthRepository authRepository(Ref ref) {
+  final account = ref.watch(appwriteAccountProvider);
+  final databases = ref.watch(appwriteDatabaseProvider);
+  return AuthRepository(account, databases);
 }

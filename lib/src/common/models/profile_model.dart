@@ -16,6 +16,7 @@ class ProfileModel {
   final double latitude;
   final double longitude;
   final String? profilePictureUrl;
+  final String? phoneNumber;
 
   @JsonKey(name: '\$createdAt')
   final DateTime? createdAt;
@@ -34,11 +35,20 @@ class ProfileModel {
     this.profilePictureUrl,
     this.createdAt,
     this.updatedAt,
+    this.phoneNumber,
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) =>
       _$ProfileModelFromJson(json);
-  Map<String, dynamic> toJson() => _$ProfileModelToJson(this);
+
+  Map<String, dynamic> toJson() {
+    final json = _$ProfileModelToJson(this);
+    // Hapus field sistem dari JSON sebelum mengirim ke Appwrite
+    json.remove('\$id');
+    json.remove('\$createdAt');
+    json.remove('\$updatedAt');
+    return json;
+  }
 
   ProfileModel copyWith({
     String? id,

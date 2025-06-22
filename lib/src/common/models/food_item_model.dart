@@ -8,14 +8,18 @@ part 'food_item_model.g.dart';
 class FoodItemModel {
   @JsonKey(name: '\$id')
   final String id;
+  // final String profileId;
+
+  //ignore the profile field in JSON serialization
+  // @JsonKey(includeFromJson: false, includeToJson: false)
   final ProfileModel? profile; //relationship with ProfileModel
   final String itemName;
   final String? itemDescription;
   final String? itemPictureUrl;
   final int originalPrice;
-  final int discountedPrice;
+  final int discountPrice;
   final int quantity;
-  final String pickupTime;
+  final String? pickupTime;
 
   @JsonKey(defaultValue: FoodItemStatus.available)
   final FoodItemStatus status;
@@ -28,13 +32,14 @@ class FoodItemModel {
 
   const FoodItemModel({
     required this.id,
+    // required this.profileId,
     this.profile,
     required this.itemName,
     this.itemDescription,
     required this.originalPrice,
-    required this.discountedPrice,
+    required this.discountPrice,
     required this.quantity,
-    required this.pickupTime,
+    this.pickupTime,
     required this.status,
     this.itemPictureUrl,
     this.createdAt,
@@ -47,6 +52,7 @@ class FoodItemModel {
 
   FoodItemModel copyWith({
     String? id,
+    String? profileId,
     ProfileModel? profile,
     String? itemName,
     String? itemDescription,
@@ -61,11 +67,12 @@ class FoodItemModel {
   }) {
     return FoodItemModel(
       id: id ?? this.id,
+      // profileId: profileId ?? this.profileId,
       profile: profile ?? this.profile,
       itemName: itemName ?? this.itemName,
       itemDescription: itemDescription ?? this.itemDescription,
       originalPrice: originalPrice ?? this.originalPrice,
-      discountedPrice: discountedPrice ?? this.discountedPrice,
+      discountPrice: discountedPrice ?? this.discountPrice,
       quantity: quantity ?? this.quantity,
       pickupTime: pickupTime ?? this.pickupTime,
       status: status ?? this.status,
@@ -78,7 +85,7 @@ class FoodItemModel {
   // Helper methods
   double get discountPercentage {
     if (originalPrice == 0) return 0;
-    return ((originalPrice - discountedPrice) / originalPrice) * 100;
+    return ((originalPrice - discountPrice) / originalPrice) * 100;
   }
 
   String get formattedOriginalPrice {
@@ -86,7 +93,7 @@ class FoodItemModel {
   }
 
   String get formattedDiscountedPrice {
-    return 'Rp ${discountedPrice.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}';
+    return 'Rp ${discountPrice.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}';
   }
 
   bool get isAvailable => status == FoodItemStatus.available && quantity > 0;
@@ -100,7 +107,7 @@ class FoodItemModel {
         other.itemName == itemName &&
         other.itemDescription == itemDescription &&
         other.originalPrice == originalPrice &&
-        other.discountedPrice == discountedPrice &&
+        other.discountPrice == discountPrice &&
         other.quantity == quantity &&
         other.pickupTime == pickupTime &&
         other.status == status &&
@@ -115,7 +122,7 @@ class FoodItemModel {
       itemName,
       itemDescription,
       originalPrice,
-      discountedPrice,
+      discountPrice,
       quantity,
       pickupTime,
       status,
@@ -125,6 +132,6 @@ class FoodItemModel {
 
   @override
   String toString() {
-    return 'FoodItemModel(id: $id, itemName: $itemName, originalPrice: $originalPrice, discountedPrice: $discountedPrice, status: $status)';
+    return 'FoodItemModel(id: $id, itemName: $itemName, originalPrice: $originalPrice, discountedPrice: $discountPrice, status: $status)';
   }
 }

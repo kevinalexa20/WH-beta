@@ -4,9 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wh_mobile/src/app.dart';
 import 'package:wh_mobile/src/utils/appwrite_client.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   AppwriteConfig.validateEnv();
+  
   runApp(ProviderScope(child: MyApp()));
 }

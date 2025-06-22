@@ -15,9 +15,9 @@ FoodItemModel _$FoodItemModelFromJson(Map<String, dynamic> json) =>
       itemName: json['itemName'] as String,
       itemDescription: json['itemDescription'] as String?,
       originalPrice: (json['originalPrice'] as num).toInt(),
-      discountedPrice: (json['discountedPrice'] as num).toInt(),
+      discountPrice: (json['discountPrice'] as num).toInt(),
       quantity: (json['quantity'] as num).toInt(),
-      pickupTime: json['pickupTime'] as String,
+      pickupTime: json['pickupTime'] as String?,
       status:
           $enumDecodeNullable(_$FoodItemStatusEnumMap, json['status']) ??
           FoodItemStatus.available,
@@ -38,7 +38,7 @@ Map<String, dynamic> _$FoodItemModelToJson(FoodItemModel instance) =>
       'itemDescription': instance.itemDescription,
       'itemPictureUrl': instance.itemPictureUrl,
       'originalPrice': instance.originalPrice,
-      'discountedPrice': instance.discountedPrice,
+      'discountPrice': instance.discountPrice,
       'quantity': instance.quantity,
       'pickupTime': instance.pickupTime,
       'status': _$FoodItemStatusEnumMap[instance.status]!,

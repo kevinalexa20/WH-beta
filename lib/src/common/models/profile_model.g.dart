@@ -21,6 +21,7 @@ ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) => ProfileModel(
   updatedAt: json[r'$updatedAt'] == null
       ? null
       : DateTime.parse(json[r'$updatedAt'] as String),
+  phoneNumber: json['phoneNumber'] as String?,
 );
 
 Map<String, dynamic> _$ProfileModelToJson(ProfileModel instance) =>
@@ -33,6 +34,7 @@ Map<String, dynamic> _$ProfileModelToJson(ProfileModel instance) =>
       'latitude': instance.latitude,
       'longitude': instance.longitude,
       'profilePictureUrl': instance.profilePictureUrl,
+      'phoneNumber': instance.phoneNumber,
       r'$createdAt': instance.createdAt?.toIso8601String(),
       r'$updatedAt': instance.updatedAt?.toIso8601String(),
     };

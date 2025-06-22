@@ -169,5 +169,46 @@ final class AppwriteStorageProvider
 
 String _$appwriteStorageHash() => r'b1c835e05314f23fe37b1729a74bbb54963188e6';
 
+@ProviderFor(authRepository)
+const authRepositoryProvider = AuthRepositoryProvider._();
+
+final class AuthRepositoryProvider
+    extends $FunctionalProvider<AuthRepository, AuthRepository>
+    with $Provider<AuthRepository> {
+  const AuthRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'authRepositoryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$authRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<AuthRepository> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  AuthRepository create(Ref ref) {
+    return authRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AuthRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $ValueProvider<AuthRepository>(value),
+    );
+  }
+}
+
+String _$authRepositoryHash() => r'3e363b8ae9d77fd3156b17c4a786992c1fd83f07';
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
